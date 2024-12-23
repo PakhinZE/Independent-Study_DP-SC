@@ -1,0 +1,22 @@
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.3.0"
+tqdm = "^4.66.4"
+numpy = "^1.26.4"
+rich = "^13.7.1"
+opacus = "^1.4.1"
+ruff = "^0.4.8"
+torchmetrics = "^1.4.0.post0"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.4"
+jupyterlab = "^4.2.0"
+PyQt6 = "^6.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

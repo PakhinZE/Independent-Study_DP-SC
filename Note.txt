@@ -1,0 +1,2 @@
+./compute_gleu -s /home/pakhinze-linux/Work/DP-SC/normalization_dataset/normalization_train.1blm.noise.random -o /home/pakhinze-linux/Work/DP-SC/result/mask-prediction -r /home/pakhinze-linux/Work/DP-SC/normalization_dataset/normalization_train.1blm
+./compute_gleu -s /home/pakhinze-linux/Work/DP-SC/normalization_dataset/normalization_train.1blm.noise.random -o /home/pakhinze-linux/Work/DP-SC/normalization_dataset/normalization_train.1blm.noise.random -r /home/pakhinze-linux/Work/DP-SC/normalization_dataset/normalization_train.1blm
