@@ -1,0 +1,14 @@
+dataset/*
+normalization_dataset/*
+model/*
+result/*
+checkpoint/*
+voc
+.venv
+__pycache__
+
+!dataset/dataset.txt
+!normalization_dataset/.gitkeep
+!model/.gitkeep
+!result/.gitkeep
+!checkpoint/.gitkeep
