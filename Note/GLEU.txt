@@ -1,0 +1,18 @@
+# Link
+https://github.com/cnap/gec-ranking
+
+./compute_gleu -s source_sentences -r reference [reference ...] \
+        -o system_output [system_output ...] -n 4 -l 0.0
+
+# Get Score
+Absolute Path = "AbsP"
+## Base Score
+./compute_gleu -s "AbsP"/normalization_dataset/normalization_test.1blm.noise.random -r "AbsP"/normalization_dataset/normalization_test.1blm -o "AbsP"/normalization_dataset/normalization_test.1blm.noise.random
+
+## Score
+./compute_gleu -s "AbsP"/normalization_dataset/normalization_test.1blm.noise.random -r "AbsP"/normalization_dataset/normalization_test.1blm -o "AbsP"/result/prediction
+./compute_gleu -s "AbsP"/normalization_dataset/normalization_test.1blm.noise.random -r "AbsP"/normalization_dataset/normalization_test.1blm -o "AbsP"/result/dp-prediction
+
+## Score (Memoization)
+./compute_gleu -s "AbsP"/normalization_dataset/normalization_train.1blm -r "AbsP"/normalization_dataset/normalization_train.1blm -o "AbsP"/result/mask-prediction
+./compute_gleu -s "AbsP"/normalization_dataset/normalization_train.1blm -r "AbsP"/normalization_dataset/normalization_train.1blm -o "AbsP"/result/dp-mask-prediction

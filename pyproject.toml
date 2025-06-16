@@ -1,0 +1,22 @@
+[project]
+name = "dp-sc"
+version = "1.1.0"
+description = "Differential Privacy Semi-character Level Recurrent Neural Network"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.3.0",
+    "opacus>=1.5.4",
+    "rich>=14.0.0",
+    "torch>=2.7.1",
+    "torchmetrics>=1.7.3",
+    "tqdm>=4.67.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "jupyterlab>=4.4.3",
+    "pyqt6>=6.9.1",
+    "ruff>=0.11.13",
+]
