@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     if CHECKPOINT and checkpoint_path.is_file():
         print(checkpoint_path)
-        save_checkpoint = torch.load(checkpoint_path)
+        save_checkpoint = torch.load(checkpoint_path, weights_only=False)
 
         NUM_EPOCHS = NUM_EPOCHS - save_checkpoint["epoch"]
         if NUM_EPOCHS == 0:
@@ -140,6 +140,7 @@ if __name__ == "__main__":
             exit()
         private_sclstm.load_state_dict(save_checkpoint["model"])
         private_optimizer.load_state_dict(save_checkpoint["optimizer"])
+        privacy_engine.accountant.load_state_dict(save_checkpoint["accountant"])
 
     if not DEBUG:
         my_model, _ = model.dp_train(
@@ -148,6 +149,7 @@ if __name__ == "__main__":
             optimizer=private_optimizer,
             data_loader=private_loader,
             voc_fn=voc,
+            privacy_engine=privacy_engine,
             num_epochs=NUM_EPOCHS,
             num_patience=PATIENCE,
             max_physical_batch_size=MAX_PHYSICAL_BATCH_SIZE,

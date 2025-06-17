@@ -119,7 +119,7 @@ if __name__ == "__main__":
         checkpoint_temp_path.replace(checkpoint_path)
 
     if CHECKPOINT and checkpoint_path.is_file():
-        save_checkpoint = torch.load(checkpoint_path)
+        save_checkpoint = torch.load(checkpoint_path, weights_only=False)
 
         NUM_EPOCHS = NUM_EPOCHS - save_checkpoint["epoch"]
         if NUM_EPOCHS == 0:

@@ -318,7 +318,7 @@ def train(
     end_t = timeit.default_timer()
     print(f"Best Cross-entropy: {best_loss}")
     print(f"Total Time Spent: {end_t - begin_t}")
-    print("Complete all epoch")
+    print("!!!Complete all epoch!!!")
     return best_model, best_loss
 
 
@@ -363,6 +363,7 @@ def dp_train(
     loss_func,
     optimizer,
     data_loader,
+    privacy_engine,
     voc_fn: dict | None = None,
     num_epochs: int = 1,
     num_patience: int = 0,
@@ -431,9 +432,12 @@ def dp_train(
             checkpoint_path = checkpoint[0]
             checkpoint_temp_path = checkpoint[1]
             checkpoint_pass_path = checkpoint[2]
+            accountant = dict()
+            privacy_engine.accountant.state_dict(accountant)
             save_checkpoint = {
                 "model": model.state_dict(),
                 "optimizer": optimizer.state_dict(),
+                "accountant": accountant,
                 "epoch": epoch + 1,
             }
             torch.save(save_checkpoint, checkpoint_temp_path)
@@ -452,7 +456,7 @@ def dp_train(
     end_t = timeit.default_timer()
     print(f"Best Cross-entropy: {best_loss}")
     print(f"Total Time Spent: {end_t - begin_t}")
-    print("Complete all epoch")
+    print("!!!Complete all epoch!!!")
     return best_model, best_loss
 
 
