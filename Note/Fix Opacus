@@ -1,0 +1,12 @@
+# .venv/lib64/python3.12/site-packages/opacus/accountants/rdp.py
+Old
+ - DEFAULT_ALPHAS = [1 + x / 10.0 for x in range(1, 100)] + list(range(12, 64))
+New
+ - DEFAULT_ALPHAS = [1 + x / 10.0 for x in range(1, 1000)] + list(range(12, 64))
+# .venv/lib64/python3.12/site-packages/opacus/optimizers/optimizer.py
+Old
+ - per_sample_clip_factor = (
+ -     self.max_grad_norm / (per_sample_norms + 1e-6)
+ - ).clamp(max=1.0)
+New
+ - per_sample_clip_factor = self.max_grad_norm / (per_sample_norms + 0.01)

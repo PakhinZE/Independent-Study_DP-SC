@@ -31,7 +31,7 @@ if __name__ == "__main__":
     # Differential Privacy
     EPSILON = 10
     DELTA = 10e-6
-    MAX_GRAD_NORM = 4
+    MAX_GRAD_NORM = 1
     MAX_PHYSICAL_BATCH_SIZE = 8
 
     # Checkpoint
