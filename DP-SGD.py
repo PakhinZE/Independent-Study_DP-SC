@@ -12,16 +12,16 @@ if __name__ == "__main__":
     DEVICE = "cuda"
 
     # Data Size
-    DATA_SIZE = 10
+    DATA_SIZE = None  # None
     # Loader
     LOADER_WORKER = 0  # Default = 0
-    BATCH_SIZE = 10
+    BATCH_SIZE = 32
     # NN
     HIDDEN_SIZE = 512
     NUM_LAYER = 2
     DROPOUT = 0.4
     # Train
-    NUM_EPOCHS = 2
+    NUM_EPOCHS = 100
     PATIENCE = 3
     LABEL_SMOOTH = 0.1
 
@@ -83,8 +83,12 @@ if __name__ == "__main__":
         label_transform=Model.sentence_to_word_tensor,
     )
 
+    if DATA_SIZE:
+        loading_datset = torch.utils.data.Subset(train_dataset, range(DATA_SIZE))
+    else:
+        loading_datset = train_dataset
     train_loader = torch.utils.data.DataLoader(
-        torch.utils.data.Subset(train_dataset, range(DATA_SIZE)),
+        loading_datset,
         batch_size=BATCH_SIZE,
         shuffle=True,
         collate_fn=Model.collate_fn,

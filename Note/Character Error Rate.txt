@@ -1,3 +1,8 @@
+normalization_train.1blm - normalization_train.1blm.noise.random
+Base Score For Spell Correction (Char Error Rate): 0.05450298264622688
+normalization_test.1blm - normalization_test.1blm.noise.random
+Base Score For Spell Correction (Char Error Rate): 0.13625337183475494
+
 Score For Spell Correction: 0.04814521595835686
 Score For DP Spell Correction: 0.6900044679641724
 Score For Memoization: 0.03735549747943878

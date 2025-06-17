@@ -2,7 +2,6 @@ import unicodedata
 import string
 from pathlib import Path
 
-DATA_SIZE = 100000
 
 def check_word(word_check):
     all_letters = string.ascii_letters + " .,;'"
@@ -38,7 +37,7 @@ def normalization_sentence_pair(sentence, sentence_noise, form="NFD"):
 
 def readlines(readfile_path):
     sentences = open(readfile_path, encoding="utf-8").read().strip().split("\n")
-    return [sentence for sentence in sentences]
+    return sentences
 
 
 def check_token_length(sentence, sentence_noise):
@@ -83,8 +82,6 @@ if __name__ == "__main__":
         print(data_noise_path)
         print(data_norm_path)
         print(data_noise_norm_path)
-        
-        size = DATA_SIZE
 
         for sentence, sentence_noise in zip(document, document_noise):
             sentence, sentence_noise = normalization_sentence_pair(
@@ -100,11 +97,6 @@ if __name__ == "__main__":
                 file_save.write("\n")
                 file_noise_save.write(sentence_noise)
                 file_noise_save.write("\n")
-                size = size - 1
-                print(size)
-                if size == 0:
-                    break
-            
 
         file_save.close()
         file_noise_save.close()

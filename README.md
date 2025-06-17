@@ -3,7 +3,7 @@ model training for comparison between differential privacy model and normal mode
 ## Step
 use uv (python package and project manager)
 download dataset first (read in /dataset) \
-subsample size = 100000 (set DATA_SIZE in base_score.py, clean.py, *SGD.py)
+subsample size = 100000 (set DATA_SIZE in base_score.py, *SGD.py)
 1. clean.py
 2. vocab.ipynb
 3. count.py (count token and sentence)

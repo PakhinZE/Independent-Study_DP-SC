@@ -1,11 +1,17 @@
 from pathlib import Path
 import Model
 
+import torch
 from torchmetrics.text import CharErrorRate
 
-DATA_SIZE = 100000
-
 if __name__ == "__main__":
+    DATA_SIZE = None  # None
+    DEVICE = "cuda"
+    
+    torch.set_default_device(DEVICE)
+    torch.backends.cudnn.allow_tf32 = True
+    torch.backends.cuda.matmul.allow_tf32 = True
+
     filename_list = [
         (
             "train.1blm",
@@ -29,9 +35,12 @@ if __name__ == "__main__":
         document = Model.readlines(data_norm_path)
         document_noise = Model.readlines(data_noise_norm_path)
 
-        print(data_noise_norm_path)
         print(data_norm_path)
+        print(data_noise_norm_path)
 
         char_error_rate = CharErrorRate()
-        score = char_error_rate(document_noise[0:DATA_SIZE], document[0:DATA_SIZE])
-        print(f"Base Score For Spell Correction: {score}")
+        if DATA_SIZE:
+            score = char_error_rate(document_noise[0:DATA_SIZE], document[0:DATA_SIZE])
+        else:
+            score = char_error_rate(document_noise, document)
+        print(f"Base Score for Spell Correction (Char Error Rate): {score}")
