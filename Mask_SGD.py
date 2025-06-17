@@ -47,7 +47,7 @@ if __name__ == "__main__":
     else:
         checkpoint_path = Path()
         checkpoint_temp_path = Path()
-        heckpoint_pass_path = Path()
+        checkpoint_pass_path = Path()
 
     # Debug
     DEBUG = False
