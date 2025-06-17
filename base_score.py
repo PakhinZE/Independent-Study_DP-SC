@@ -1,5 +1,5 @@
 from pathlib import Path
-import Model
+import model
 
 import torch
 from torchmetrics.text import CharErrorRate
@@ -32,8 +32,8 @@ if __name__ == "__main__":
             f"normalization_{filename_noise}"
         )
 
-        document = Model.readlines(data_norm_path)
-        document_noise = Model.readlines(data_noise_norm_path)
+        document = model.readlines(data_norm_path)
+        document_noise = model.readlines(data_noise_norm_path)
 
         print(data_norm_path)
         print(data_noise_norm_path)

@@ -4,7 +4,7 @@ from pathlib import Path
 import torch
 import torch.utils.data
 
-import Model
+import model
 
 
 if __name__ == "__main__":
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         checkpoint_path = (
             PATH.joinpath("checkpoint")
             .joinpath(Path(__file__).stem)
-            .with_suffix(".cpth")
+            .with_suffix(".pth")
             .absolute()
         )
         checkpoint_temp_path = (
@@ -69,12 +69,12 @@ if __name__ == "__main__":
         "normalization_train.1blm"
     )
 
-    train_dataset = Model.spell_correction_dataset(
+    train_dataset = model.spell_correction_dataset(
         noise_dataset_path=noise_train_dataset_path,
         ref_dataset_path=label_train_dataset_path,
         voc=voc,
-        transform=Model.sentence_to_semi_char_tensor,
-        label_transform=Model.sentence_to_word_tensor,
+        transform=model.sentence_to_semi_char_tensor,
+        label_transform=model.sentence_to_word_tensor,
     )
 
     if DATA_SIZE:
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         loading_datset,
         batch_size=BATCH_SIZE,
         shuffle=True,
-        collate_fn=Model.collate_fn,
+        collate_fn=model.collate_fn,
         generator=torch.Generator(device=DEVICE),
         num_workers=LOADER_WORKER,
     )
@@ -94,7 +94,7 @@ if __name__ == "__main__":
         ignore_index=voc["pad_token_idx"], label_smoothing=LABEL_SMOOTH
     )
 
-    sclstm = Model.sclstm(
+    sclstm = model.sclstm(
         word_size=WORD_SIZE,
         semi_char_vec_size=SEMI_CHAR_VEC_SIZE,
         hidden_size=HIDDEN_SIZE,
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         optimizer.load_state_dict(save_checkpoint["optimizer"])
 
     if not DEBUG:
-        my_model, _ = Model.train(
+        my_model, _ = model.train(
             model=sclstm,
             loss_func=cross_entropy_loss,
             optimizer=optimizer,
@@ -136,7 +136,7 @@ if __name__ == "__main__":
         model_path = PATH.joinpath("model").joinpath("sclstm.pth").absolute()
         torch.save(my_model, model_path)
     else:
-        Model.try_one_batch(
+        model.try_one_batch(
             model=sclstm,
             loss_func=cross_entropy_loss,
             optimizer=optimizer,
