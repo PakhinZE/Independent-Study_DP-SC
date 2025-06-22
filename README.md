@@ -13,6 +13,6 @@ subsample size = 100000 (set DATA_SIZE in base_score.py, *SGD.py)
     * DP-SGD.py
     * Mask_SGD.py
     * Mask_DP-SGD.py
-6. Get-result.ipynb (get result text file in /result)
-7. Character Error Rate.ipynb (get score for CharErrorRate)
+6. get_result_text.py (get result text file in /result)
+7. get_character_error_rate.py (get score for Character Error Rate)
 8. /GLEU/compute_gleu (read in /Note/GLEU)

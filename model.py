@@ -504,7 +504,7 @@ def dp_try_one_batch(
         print(f"Batch Time Spent: {end_t - begin_t}")
 
 
-def load_compiled_model(compiled_model_path):
+def load_compiled_model(compiled_model_path):  # No longer used
     compiled_model = torch.load(compiled_model_path)
     model_weight = OrderedDict()
     for key, value in compiled_model.items():
@@ -516,7 +516,7 @@ def load_compiled_model(compiled_model_path):
     return model_weight
 
 
-def load_dp_model(dp_model_path):
+def load_dp_model(dp_model_path):  # No longer used
     dp_model = torch.load(dp_model_path)
     model_weight = OrderedDict()
     for key, value in dp_model.items():
