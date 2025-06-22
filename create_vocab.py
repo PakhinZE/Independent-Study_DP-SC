@@ -15,6 +15,7 @@ train_corrupt_path = data_dir.joinpath(
 test_clean_path = data_dir.joinpath("normalization_test.1blm").absolute()
 test_corrupt_path = data_dir.joinpath("normalization_test.1blm.noise.random").absolute()
 
+
 # %%
 def load_data(base_path, corr_file, incorr_file):
     # load files
@@ -56,6 +57,7 @@ def load_data(base_path, corr_file, incorr_file):
 
     print(f"loaded tuples of (corr,incorr) examples from {base_path}")
     return data
+
 
 # %%
 def get_char_tokens(use_default: bool, data=None):
@@ -159,6 +161,7 @@ def get_char_tokens(use_default: bool, data=None):
     return_dict["char_mask_token_idx"] = chartoken2idx[char_mask_token]
 
     return return_dict
+
 
 # %%
 def get_tokens(
@@ -289,6 +292,7 @@ def get_tokens(
 
     return return_dict
 
+
 # %%
 def save_vocab_dict(path_: str, vocab_: dict):
     """
@@ -298,6 +302,7 @@ def save_vocab_dict(path_: str, vocab_: dict):
     with open(path_, "wb") as fp:
         pickle.dump(vocab_, fp, protocol=pickle.HIGHEST_PROTOCOL)
     return
+
 
 # %%
 print("------------------------")
@@ -329,5 +334,3 @@ voc_path = PATH.joinpath("voc").absolute()
 
 # %%
 save_vocab_dict(str(voc_path), voc)
-
-
