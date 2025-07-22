@@ -273,7 +273,7 @@ def train(
             loss.backward()
             optimizer.step()
 
-            epoch_loss = epoch_loss + loss.float()
+            epoch_loss = epoch_loss + loss.item()
 
         epoch_loss = epoch_loss / num_batch
         if epoch_loss < best_loss:
@@ -408,7 +408,7 @@ def dp_train(
                 loss.backward()
                 optimizer.step()
 
-                epoch_loss = epoch_loss + loss.float()
+                epoch_loss = epoch_loss + loss.item()
 
         epoch_loss = epoch_loss / expt_num_batch
         if epoch_loss < best_loss:
