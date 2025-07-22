@@ -32,7 +32,7 @@ if __name__ == "__main__":
     EPSILON = 10
     DELTA = 10e-6
     MAX_GRAD_NORM = 1
-    MAX_PHYSICAL_BATCH_SIZE = 8
+    MAX_PHYSICAL_BATCH_SIZE = 1
 
     # Checkpoint
     CHECKPOINT = True
