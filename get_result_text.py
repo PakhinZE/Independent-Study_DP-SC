@@ -136,7 +136,7 @@ dp_mask_sclstm = class_model.dp_sclstm(
 model_path = PATH.joinpath("model").joinpath("sclstm.pth").absolute()
 dp_model_path = PATH.joinpath("model").joinpath("dp-sclstm.pth").absolute()
 mask_model_path = PATH.joinpath("model").joinpath("mask-sclstm.pth").absolute()
-dp_mask_model_path = PATH.joinpath("model").joinpath("mask-dp-sclstm.pth").absolute()
+dp_mask_model_path = PATH.joinpath("model").joinpath("dp-mask-sclstm.pth").absolute()
 
 # %%
 sclstm = torch.compile(sclstm)
