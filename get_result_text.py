@@ -154,6 +154,7 @@ mask_sclstm.load_state_dict(torch.load(mask_model_path))
 dp_mask_sclstm = opacus.grad_sample.grad_sample_module.GradSampleModule(dp_mask_sclstm)
 dp_mask_sclstm.load_state_dict(torch.load(dp_mask_model_path))
 
+
 # %%
 def get_predict_text(my_model, data_loader, voc_fn):
     my_model.eval()

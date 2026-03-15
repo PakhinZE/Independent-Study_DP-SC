@@ -10,10 +10,10 @@ subsample size = 100000 (set DATA_SIZE in base_score.py, *SGD.py)
 4. base_score.py (get base score for CharErrorRate)
 5. fix opacus code (read in /Note/Fix Opacus.txt)
 6. Model
-    * SGD.py
-    * DP-SGD.py
-    * Mask_SGD.py
-    * Mask_DP-SGD.py
+    * Model-1_SGD.py
+    * Model-2_DP-SGD.py
+    * Model-3_Mask-SGD.py
+    * Model-4_DP-Mask-SGD.py
 7. get_result_text.py (get result text file in /result)
 8. get_character_error_rate.py (get score for Character Error Rate)
 9. /GLEU/compute_gleu (read in /Note/GLEU.txt)

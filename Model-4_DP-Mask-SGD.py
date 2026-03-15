@@ -163,7 +163,7 @@ if __name__ == "__main__":
             checkpoint=[checkpoint_path, checkpoint_temp_path, checkpoint_pass_path],
         )
 
-        model_path = PATH.joinpath("model").joinpath("mask-dp-sclstm.pth").absolute()
+        model_path = PATH.joinpath("model").joinpath("dp-mask-sclstm.pth").absolute()
         torch.save(my_model, model_path)
     else:
         model.dp_try_one_batch(

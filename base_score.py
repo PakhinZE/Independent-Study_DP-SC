@@ -7,7 +7,7 @@ from torchmetrics.text import CharErrorRate
 if __name__ == "__main__":
     DATA_SIZE = None  # None
     DEVICE = "cuda"
-    
+
     torch.set_default_device(DEVICE)
     torch.backends.cudnn.allow_tf32 = True
     torch.backends.cuda.matmul.allow_tf32 = True

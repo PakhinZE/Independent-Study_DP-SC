@@ -5,6 +5,11 @@ from pathlib import Path
 from tqdm import tqdm
 
 # %%
+TOP_K_TOKEN = 100000  # All token equal TOP_K + 4
+MIN_FREQ_TOKEN = 1
+MAX_FREQ_TOKEN = float("inf")
+
+# %%
 PATH = Path(__file__).parent
 print(PATH)
 data_dir = PATH.joinpath("normalization_dataset")
@@ -315,8 +320,8 @@ corrupt_sentences = [sentence_pair[1] for sentence_pair in train_data]
 voc = get_tokens(
     clean_sentences,
     keep_simple=False,
-    min_max_freq=(1, float("inf")),
-    topk=100000,
+    min_max_freq=(MIN_FREQ_TOKEN, MAX_FREQ_TOKEN),
+    topk=TOP_K_TOKEN,
     load_char_tokens=True,
 )
 print("------------------------")
@@ -325,7 +330,7 @@ print("------------------------")
 voc.keys()
 
 # %%
-print(f"All total tokens found: {len(voc["token2idx"])}")
+print(f"All total tokens found: {len(voc['token2idx'])}")
 
 # %%
 print(f"number of all chars found: {len(voc['chartoken2idx'])}")
