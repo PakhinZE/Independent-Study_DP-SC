@@ -5,7 +5,7 @@ import torch
 import torch.utils.data
 import opacus
 
-import model
+import class_model
 
 if __name__ == "__main__":
     PATH = Path(__file__).parent
@@ -75,12 +75,12 @@ if __name__ == "__main__":
         "normalization_train.1blm"
     )
 
-    train_dataset = model.spell_correction_dataset(
+    train_dataset = class_model.spell_correction_dataset(
         noise_dataset_path=noise_train_dataset_path,
         ref_dataset_path=label_train_dataset_path,
         voc=voc,
-        transform=model.sentence_to_semi_char_tensor,
-        label_transform=model.sentence_to_word_tensor,
+        transform=class_model.sentence_to_semi_char_tensor,
+        label_transform=class_model.sentence_to_word_tensor,
     )
 
     if DATA_SIZE:
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         loading_datset,
         batch_size=BATCH_SIZE,
         shuffle=True,
-        collate_fn=model.collate_fn,
+        collate_fn=class_model.collate_fn,
         generator=torch.Generator(device=DEVICE),
         num_workers=LOADER_WORKER,
     )
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         ignore_index=voc["pad_token_idx"], label_smoothing=LABEL_SMOOTH
     )
 
-    dp_sclstm = model.dp_sclstm(
+    dp_sclstm = class_model.dp_sclstm(
         word_size=WORD_SIZE,
         semi_char_vec_size=SEMI_CHAR_VEC_SIZE,
         hidden_size=HIDDEN_SIZE,
@@ -143,7 +143,7 @@ if __name__ == "__main__":
         privacy_engine.accountant.load_state_dict(save_checkpoint["accountant"])
 
     if not DEBUG:
-        my_model, _ = model.dp_train(
+        my_model, _ = class_model.dp_train(
             model=private_sclstm,
             loss_func=cross_entropy_loss,
             optimizer=private_optimizer,
@@ -159,7 +159,7 @@ if __name__ == "__main__":
         model_path = PATH.joinpath("model").joinpath("dp-sclstm.pth").absolute()
         torch.save(my_model, model_path)
     else:
-        model.dp_try_one_batch(
+        class_model.dp_try_one_batch(
             model=private_sclstm,
             loss_func=cross_entropy_loss,
             optimizer=private_optimizer,

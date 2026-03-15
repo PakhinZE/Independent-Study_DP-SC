@@ -9,7 +9,7 @@ import torch
 import torch.utils.data
 import opacus
 
-import model
+import class_model
 
 # %%
 PATH = Path(__file__).parent
@@ -61,12 +61,12 @@ label_test_dataset_path = PATH.joinpath("normalization_dataset/").joinpath(
 )
 
 # %%
-test_dataset = model.spell_correction_dataset(
+test_dataset = class_model.spell_correction_dataset(
     noise_dataset_path=noise_test_dataset_path,
     ref_dataset_path=label_test_dataset_path,
     voc=voc,
-    transform=model.sentence_to_semi_char_tensor,
-    label_transform=model.sentence_to_word_tensor,
+    transform=class_model.sentence_to_semi_char_tensor,
+    label_transform=class_model.sentence_to_word_tensor,
 )
 if DATA_SIZE:
     loading_datset = torch.utils.data.Subset(test_dataset, range(DATA_SIZE))
@@ -76,18 +76,18 @@ test_loader = torch.utils.data.DataLoader(
     loading_datset,
     batch_size=BATCH_SIZE,
     shuffle=False,
-    collate_fn=model.collate_fn,
+    collate_fn=class_model.collate_fn,
     generator=torch.Generator(device=DEVICE),
     num_workers=LOADER_WORKER,
 )
 
-sentence_to_semi_char_tensor = partial(model.sentence_to_semi_char_tensor, mask=MASK)
-mask_test_dataset = model.spell_correction_dataset(
+sentence_to_semi_char_tensor = partial(class_model.sentence_to_semi_char_tensor, mask=MASK)
+mask_test_dataset = class_model.spell_correction_dataset(
     noise_dataset_path=label_train_dataset_path,  # no noise
     ref_dataset_path=label_train_dataset_path,
     voc=voc,
     transform=sentence_to_semi_char_tensor,  # mask
-    label_transform=model.sentence_to_word_tensor,
+    label_transform=class_model.sentence_to_word_tensor,
 )
 if DATA_SIZE:
     loading_datset = torch.utils.data.Subset(mask_test_dataset, range(DATA_SIZE))
@@ -97,34 +97,34 @@ mask_test_loader = torch.utils.data.DataLoader(
     loading_datset,
     batch_size=BATCH_SIZE,
     shuffle=False,
-    collate_fn=model.collate_fn,
+    collate_fn=class_model.collate_fn,
     generator=torch.Generator(device=DEVICE),
     num_workers=LOADER_WORKER,
 )
 
 # %%
-sclstm = model.sclstm(
+sclstm = class_model.sclstm(
     word_size=WORD_SIZE,
     semi_char_vec_size=SEMI_CHAR_VEC_SIZE,
     hidden_size=HIDDEN_SIZE,
     num_layers=NUM_LAYER,
     dropout=DROPOUT,
 )
-mask_sclstm = model.sclstm(
+mask_sclstm = class_model.sclstm(
     word_size=WORD_SIZE,
     semi_char_vec_size=SEMI_CHAR_VEC_SIZE,
     hidden_size=HIDDEN_SIZE,
     num_layers=NUM_LAYER,
     dropout=DROPOUT,
 )
-dp_sclstm = model.dp_sclstm(
+dp_sclstm = class_model.dp_sclstm(
     word_size=WORD_SIZE,
     semi_char_vec_size=SEMI_CHAR_VEC_SIZE,
     hidden_size=HIDDEN_SIZE,
     num_layers=NUM_LAYER,
     dropout=DROPOUT,
 )
-dp_mask_sclstm = model.dp_sclstm(
+dp_mask_sclstm = class_model.dp_sclstm(
     word_size=WORD_SIZE,
     semi_char_vec_size=SEMI_CHAR_VEC_SIZE,
     hidden_size=HIDDEN_SIZE,
@@ -164,7 +164,7 @@ def get_predict_text(my_model, data_loader, voc_fn):
         for x_batch, y_batch in tqdm(data_loader):
             y_logit_pred = my_model(x_batch)
             y_logit_pred = y_logit_pred[0]
-            text_pred = model.word_tensor_to_sentence(y_logit_pred, voc_fn)
+            text_pred = class_model.word_tensor_to_sentence(y_logit_pred, voc_fn)
             text_preds.append(text_pred)
 
             if DEBUG:
