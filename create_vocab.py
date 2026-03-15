@@ -325,10 +325,10 @@ print("------------------------")
 voc.keys()
 
 # %%
-len(voc["token2idx"])
+print(f"All total tokens found: {len(voc["token2idx"])}")
 
 # %%
-len(voc["chartoken2idx"])
+print(f"number of all chars found: {len(voc['chartoken2idx'])}")
 
 # %%
 voc_path = PATH.joinpath("voc").absolute()
