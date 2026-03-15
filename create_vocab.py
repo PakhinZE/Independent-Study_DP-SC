@@ -36,7 +36,8 @@ def load_data(base_path, corr_file, incorr_file):
     assert len(incorr_data) == len(corr_data)
 
     # verify if token split is same
-    for i, (x, y) in tqdm(enumerate(zip(corr_data, incorr_data))):
+    tqdm_total = max(len(corr_data), len(incorr_data))
+    for i, (x, y) in tqdm(enumerate(zip(corr_data, incorr_data)), total=tqdm_total):
         x_split, y_split = x.split(), y.split()
         try:
             assert len(x_split) == len(y_split)
@@ -52,7 +53,7 @@ def load_data(base_path, corr_file, incorr_file):
 
     # return as pairs
     data = []
-    for x, y in tqdm(zip(corr_data, incorr_data)):
+    for x, y in tqdm(zip(corr_data, incorr_data), total=tqdm_total):
         data.append((x, y))
 
     print(f"loaded tuples of (corr,incorr) examples from {base_path}")

@@ -136,7 +136,7 @@ dp_mask_sclstm = model.dp_sclstm(
 model_path = PATH.joinpath("model").joinpath("sclstm.pth").absolute()
 dp_model_path = PATH.joinpath("model").joinpath("dp-sclstm.pth").absolute()
 mask_model_path = PATH.joinpath("model").joinpath("mask-sclstm.pth").absolute()
-dp_mask_model_path = PATH.joinpath("model").joinpath("dp-mask-sclstm.pth").absolute()
+dp_mask_model_path = PATH.joinpath("model").joinpath("mask-dp-sclstm.pth").absolute()
 
 # %%
 sclstm = torch.compile(sclstm)
@@ -154,15 +154,14 @@ mask_sclstm.load_state_dict(torch.load(mask_model_path))
 dp_mask_sclstm = opacus.grad_sample.grad_sample_module.GradSampleModule(dp_mask_sclstm)
 dp_mask_sclstm.load_state_dict(torch.load(dp_mask_model_path))
 
-
 # %%
-def get_predict_text(model, data_loader, voc_fn):
-    model.eval()
+def get_predict_text(my_model, data_loader, voc_fn):
+    my_model.eval()
     text_preds = []
 
     with torch.no_grad():
         for x_batch, y_batch in tqdm(data_loader):
-            y_logit_pred = model(x_batch)
+            y_logit_pred = my_model(x_batch)
             y_logit_pred = y_logit_pred[0]
             text_pred = model.word_tensor_to_sentence(y_logit_pred, voc_fn)
             text_preds.append(text_pred)
@@ -186,20 +185,20 @@ def write_to_file(list_string, path):
 
 
 # %%
-preds = get_predict_text(model=sclstm, data_loader=test_loader, voc_fn=voc)
+preds = get_predict_text(my_model=sclstm, data_loader=test_loader, voc_fn=voc)
 pred_path = PATH.joinpath("result").joinpath("prediction").absolute()
 write_to_file(preds, pred_path)
 del preds
 
 # %%
-dp_preds = get_predict_text(model=dp_sclstm, data_loader=test_loader, voc_fn=voc)
+dp_preds = get_predict_text(my_model=dp_sclstm, data_loader=test_loader, voc_fn=voc)
 dp_pred_path = PATH.joinpath("result").joinpath("dp-prediction").absolute()
 write_to_file(dp_preds, dp_pred_path)
 del dp_preds
 
 # %%
 mask_preds = get_predict_text(
-    model=mask_sclstm, data_loader=mask_test_loader, voc_fn=voc
+    my_model=mask_sclstm, data_loader=mask_test_loader, voc_fn=voc
 )
 mask_pred_path = PATH.joinpath("result").joinpath("mask-prediction").absolute()
 write_to_file(mask_preds, mask_pred_path)
@@ -207,7 +206,7 @@ del mask_preds
 
 # %%
 dp_mask_preds = get_predict_text(
-    model=dp_mask_sclstm, data_loader=mask_test_loader, voc_fn=voc
+    my_model=dp_mask_sclstm, data_loader=mask_test_loader, voc_fn=voc
 )
 dp_mask_pred_path = PATH.joinpath("result").joinpath("dp-mask-prediction").absolute()
 write_to_file(dp_mask_preds, dp_mask_pred_path)
