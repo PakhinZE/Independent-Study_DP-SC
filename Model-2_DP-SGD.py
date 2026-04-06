@@ -29,7 +29,7 @@ if __name__ == "__main__":
     EPSILON = 10
     DELTA = 10e-6
     MAX_GRAD_NORM = 1
-    MAX_PHYSICAL_BATCH_SIZE = 1
+    MAX_PHYSICAL_BATCH_SIZE = 1  # need to change
 
     # Checkpoint
     CHECKPOINT = True
@@ -51,6 +51,21 @@ if __name__ == "__main__":
         checkpoint_path = Path()
         checkpoint_temp_path = Path()
         checkpoint_pass_path = Path()
+
+    # History
+    HISTORY = True
+    from datetime import datetime
+
+    current_datetime = datetime.now().replace(microsecond=0)
+    if HISTORY:
+        history_path = (
+            PATH.joinpath("history")
+            .joinpath(f"{Path(__file__).stem} {current_datetime}")
+            .with_suffix(".txt")
+            .absolute()
+        )
+    else:
+        history_path = Path()
 
     # Debug
     DEBUG = False
@@ -154,6 +169,7 @@ if __name__ == "__main__":
             num_patience=PATIENCE,
             max_physical_batch_size=MAX_PHYSICAL_BATCH_SIZE,
             checkpoint=[checkpoint_path, checkpoint_temp_path, checkpoint_pass_path],
+            history=history_path,
         )
 
         model_path = PATH.joinpath("model").joinpath("dp-sclstm.pth").absolute()

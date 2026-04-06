@@ -1,18 +1,18 @@
 {
     "python.defaultInterpreterPath": "",
     "python.languageServer": "Pylance",
-    "python.analysis.typeCheckingMode": "basic",
     "editor.semanticTokenColorCustomizations": {
-        "[Default Dark+]": {
+        "[Dark+]": {
             "enabled": true,
             "rules": {
                 "variable:python": "#9CDCFE",
                 "magicFunction:python": "#d1d11b",
-                "parameter:python": "#3533c0",
-                "clsParameter:python": "#3533c0",
-                "selfParameter:python": "#3533c0",
+                "parameter:python": "#106fdb",
+                "clsParameter:python": "#106fdb",
+                "selfParameter:python": "#106fdb",
                 "property:python": "#0b75ee",
-                "intrinsic:python": "#c31a14"
+                "intrinsic:python": "#c31a14",
+                "variable.readonly": "#9a14c3"
             }
         }
     }

@@ -46,6 +46,21 @@ if __name__ == "__main__":
         checkpoint_temp_path = Path()
         checkpoint_pass_path = Path()
 
+    # History
+    HISTORY = True
+    from datetime import datetime
+
+    current_datetime = datetime.now().replace(microsecond=0)
+    if HISTORY:
+        history_path = (
+            PATH.joinpath("history")
+            .joinpath(f"{Path(__file__).stem} {current_datetime}")
+            .with_suffix(".txt")
+            .absolute()
+        )
+    else:
+        history_path = Path()
+
     # Debug
     DEBUG = False
     DEBUG_EPOCH = False
@@ -131,6 +146,7 @@ if __name__ == "__main__":
             num_epochs=NUM_EPOCHS,
             num_patience=PATIENCE,
             checkpoint=[checkpoint_path, checkpoint_temp_path, checkpoint_pass_path],
+            history=history_path,
         )
 
         model_path = PATH.joinpath("model").joinpath("sclstm.pth").absolute()

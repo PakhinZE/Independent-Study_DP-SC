@@ -241,6 +241,7 @@ def train(
     num_epochs: int = 1,
     num_patience: int = 0,
     checkpoint: List[Path] = [Path(), Path(), Path()],
+    history: Path = Path(),
 ):
     begin_t = timeit.default_timer()
     have_patience = True if num_patience > 0 else False
@@ -307,6 +308,13 @@ def train(
             checkpoint_temp_path.replace(checkpoint_path)
             checkpoint_pass_path.unlink()
 
+        if not history == Path():
+            from datetime import datetime
+
+            current_datetime = datetime.now()
+            history_text = f"[{current_datetime}] Cross-entropy: {epoch_loss:.4f}, Epoch Time Spent: {end_t_epoch - begin_t_epoch:.4f}\n"
+            open(history, mode="a", encoding="utf-8").write(history_text)
+
         print(f"Current Epoch: {epoch + 1}")
         print(f"Epoch Time Spent: {end_t_epoch - begin_t_epoch}")
         print(f"Cross-entropy: {epoch_loss}")
@@ -369,6 +377,7 @@ def dp_train(
     num_patience: int = 0,
     max_physical_batch_size: int = 1,
     checkpoint: List[Path] = [Path(), Path(), Path()],
+    history: Path = Path(),
 ):
     begin_t = timeit.default_timer()
     have_patience = True if num_patience > 0 else False
@@ -444,6 +453,13 @@ def dp_train(
             checkpoint_pass_path.touch()
             checkpoint_temp_path.replace(checkpoint_path)
             checkpoint_pass_path.unlink()
+
+        if not history == Path():
+            from datetime import datetime
+
+            current_datetime = datetime.now()
+            history_text = f"[{current_datetime}] Cross-entropy: {epoch_loss:.4f}, Epoch Time Spent: {end_t_epoch - begin_t_epoch:.4f}\n"
+            open(history, mode="a", encoding="utf-8").write(history_text)
 
         print(f"Current Epoch: {epoch + 1}")
         print(f"Epoch Time Spent: {end_t_epoch - begin_t_epoch}")
