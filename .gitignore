@@ -3,6 +3,7 @@ normalization_dataset/*
 model/*
 result/*
 checkpoint/*
+history/*
 voc
 .venv
 __pycache__
@@ -12,3 +13,4 @@ __pycache__
 !model/.gitkeep
 !result/.gitkeep
 !checkpoint/.gitkeep
+!history/.gitkeep
