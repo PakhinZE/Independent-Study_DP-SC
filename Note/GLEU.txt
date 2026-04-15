@@ -10,13 +10,13 @@ PYTHON_3=""
 DP_PATH=""
 
 ## Base Score
-$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu.py -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random
 
 ## Score
-$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/result/prediction
-$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/result/dp-prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu.py -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/result/prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu.py -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/result/dp-prediction
 
 ## Score (Memoization)
-$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_train.1blm -r $DP_PATH/normalization_dataset/normalization_train.1blm -o $DP_PATH/result/mask-prediction
-$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_train.1blm -r $DP_PATH/normalization_dataset/normalization_train.1blm -o $DP_PATH/result/dp-mask-prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu.py -s $DP_PATH/normalization_dataset/normalization_train.1blm -r $DP_PATH/normalization_dataset/normalization_train.1blm -o $DP_PATH/result/mask-prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu.py -s $DP_PATH/normalization_dataset/normalization_train.1blm -r $DP_PATH/normalization_dataset/normalization_train.1blm -o $DP_PATH/result/dp-mask-prediction
 
