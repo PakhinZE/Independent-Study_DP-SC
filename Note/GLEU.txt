@@ -5,14 +5,18 @@ https://github.com/cnap/gec-ranking
         -o system_output [system_output ...] -n 4 -l 0.0
 
 # Get Score
-Absolute Path = "AbsP"
+PYTHON_2=""
+PYTHON_3=""
+DP_PATH=""
+
 ## Base Score
-./compute_gleu -s "AbsP"/normalization_dataset/normalization_test.1blm.noise.random -r "AbsP"/normalization_dataset/normalization_test.1blm -o "AbsP"/normalization_dataset/normalization_test.1blm.noise.random
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random
 
 ## Score
-./compute_gleu -s "AbsP"/normalization_dataset/normalization_test.1blm.noise.random -r "AbsP"/normalization_dataset/normalization_test.1blm -o "AbsP"/result/prediction
-./compute_gleu -s "AbsP"/normalization_dataset/normalization_test.1blm.noise.random -r "AbsP"/normalization_dataset/normalization_test.1blm -o "AbsP"/result/dp-prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/result/prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_test.1blm.noise.random -r $DP_PATH/normalization_dataset/normalization_test.1blm -o $DP_PATH/result/dp-prediction
 
 ## Score (Memoization)
-./compute_gleu -s "AbsP"/normalization_dataset/normalization_train.1blm -r "AbsP"/normalization_dataset/normalization_train.1blm -o "AbsP"/result/mask-prediction
-./compute_gleu -s "AbsP"/normalization_dataset/normalization_train.1blm -r "AbsP"/normalization_dataset/normalization_train.1blm -o "AbsP"/result/dp-mask-prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_train.1blm -r $DP_PATH/normalization_dataset/normalization_train.1blm -o $DP_PATH/result/mask-prediction
+$PYTHON_3 $DP_PATH/GLEU/compute_gleu -s $DP_PATH/normalization_dataset/normalization_train.1blm -r $DP_PATH/normalization_dataset/normalization_train.1blm -o $DP_PATH/result/dp-mask-prediction
+
